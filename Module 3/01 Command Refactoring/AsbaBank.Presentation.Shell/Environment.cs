@@ -35,10 +35,11 @@ namespace AsbaBank.Presentation.Shell
 
         private static void RegisterCommands()
         {
-            RegsiterCommand(new RegisterClientShell());   
+            RegisterCommand(new RegisterClientShell());   
+            RegisterCommand(new CreateClientAccountShell());
         }
 
-        private static void RegsiterCommand(IShellCommand command)
+        private static void RegisterCommand(IShellCommand command)
         {
             ShellCommands.Add(command.Key, command);
         }

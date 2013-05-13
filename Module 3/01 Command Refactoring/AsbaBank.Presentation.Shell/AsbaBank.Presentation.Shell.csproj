@@ -42,6 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\CreateClientAccount.cs" />
+    <Compile Include="Commands\CreateClientAccountShell.cs" />
     <Compile Include="Commands\RegisterClient.cs" />
     <Compile Include="Commands\RegisterClientShell.cs" />
     <Compile Include="Environment.cs" />
