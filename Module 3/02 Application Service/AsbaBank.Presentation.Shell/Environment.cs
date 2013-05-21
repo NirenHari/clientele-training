@@ -9,13 +9,13 @@ namespace AsbaBank.Presentation.Shell
 {
     public static class Environment
     {
-        private static readonly InMemoryDataStore DataStore;
+        private static readonly BankContext DataStore;
         public static readonly ILog Logger;
         private static readonly Dictionary<string, IShellCommand> ShellCommands; 
         
         static Environment()
         {
-            DataStore = new InMemoryDataStore();
+            DataStore = new BankContext();
             Logger = new ConsoleWindowLogger();
             ShellCommands = new Dictionary<string, IShellCommand>();
             RegisterCommands();
@@ -33,10 +33,11 @@ namespace AsbaBank.Presentation.Shell
 
         private static void RegisterCommands()
         {
-            RegsiterCommand(new RegisterClientShell());   
+            RegisterCommand(new RegisterClientShell());   
+            RegisterCommand(new FetchClientShell());
         }
 
-        private static void RegsiterCommand(IShellCommand command)
+        private static void RegisterCommand(IShellCommand command)
         {
             ShellCommands.Add(command.Key, command);
         }
@@ -44,9 +45,10 @@ namespace AsbaBank.Presentation.Shell
         public static IPublishCommands GetCommandPublisher()
         {
             var commandPublisher = new LocalCommandPublisher();
-            var unitOfWork = new InMemoryUnitOfWork(DataStore);
+            var unitOfWork = new UnitOfWork(DataStore);
 
             commandPublisher.Subscribe(new RegisterClientHandler(unitOfWork, Logger));
+            commandPublisher.Subscribe(new FetchClientHandler(unitOfWork, Logger));
 
             return commandPublisher;
         }
