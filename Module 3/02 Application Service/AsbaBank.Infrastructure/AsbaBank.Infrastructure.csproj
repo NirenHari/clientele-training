@@ -52,9 +52,6 @@
   <ItemGroup>
     <Compile Include="BankContext.cs" />
     <Compile Include="ConsoleWindowLogger.cs" />
-    <Compile Include="InMemoryDataStore.cs" />
-    <Compile Include="InMemoryRepository.cs" />
-    <Compile Include="InMemoryUnitOfWork.cs" />
     <Compile Include="LocalCommandPublisher.cs" />
     <Compile Include="Infrastructure.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

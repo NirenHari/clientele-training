@@ -32,7 +32,7 @@ namespace AsbaBank.Infrastructure
         }
         public IEnumerator<TEntity> GetEnumerator()
         {
-            throw new NotImplementedException();
+            return DataSet.AsEnumerable().GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -40,6 +40,7 @@ namespace AsbaBank.Infrastructure
             return GetEnumerator();
         }
 
+        
         public void Add(TEntity item)
         {
             DataSet.Add(item);
@@ -71,7 +72,7 @@ namespace AsbaBank.Infrastructure
 
         public TEntity Get(object id)
         {
-            return DataSet.AsQueryable<TEntity>().SingleOrDefault(WithMatchingId(id));
+            return DataSet.Find(id);
         }
 
         private Func<TEntity, bool> WithMatchingId(object id)

@@ -6,20 +6,14 @@ using System.Runtime.Serialization;
 
 namespace AsbaBank.Domain.Models
 {
-    [DataContract]
     public class Account
     {
-        [Key, DataMember] 
+        [Key] 
         public int Id { get; protected set; }
-        [DataMember] 
         public int ClientId { get; protected set; }
-        [DataMember] 
         public string AccountNumber { get; protected set; }
-        [DataMember] 
         public bool Closed { get; protected set; }
-        [DataMember]
         public ICollection<Transaction> Ledger { get; set; }  
-        [DataMember]
         public ICollection<BankCard> BankCards { get; set; }  
 
         protected Account()

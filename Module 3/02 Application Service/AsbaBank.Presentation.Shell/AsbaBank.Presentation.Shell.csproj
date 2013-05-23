@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ShellCommands\AddAddressToClientShell.cs" />
+    <Compile Include="ShellCommands\FetchClientAddressShell.cs" />
     <Compile Include="ShellCommands\FetchClientShell.cs" />
     <Compile Include="ShellCommands\RegisterClientShell.cs" />
     <Compile Include="Environment.cs" />

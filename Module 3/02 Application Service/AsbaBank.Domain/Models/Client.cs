@@ -1,24 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Runtime.Serialization;
-
 using AsbaBank.Core;
 
 namespace AsbaBank.Domain.Models
 {
-    [DataContract]
     public class Client
     {
-        [Key, DataMember]
+        [Key]
         public int Id { get; protected set; }
-        [DataMember]
         public string Name { get; protected set; }
-        [DataMember]
         public string Surname { get; protected set; }
-        [DataMember]
         public string PhoneNumber { get; protected set; }
-        [DataMember]
-        public Address Address { get; protected set; }
+        public List<Address> Address { get; protected set; }
 
         protected Client()
         {
@@ -45,7 +39,6 @@ namespace AsbaBank.Domain.Models
             Name = clientName;
             Surname = clientSurname;
             PhoneNumber = phoneNumber;
-            Address = Address.NullAddress();
         }
     }
 }

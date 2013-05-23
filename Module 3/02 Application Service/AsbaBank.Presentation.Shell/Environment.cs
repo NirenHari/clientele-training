@@ -15,7 +15,7 @@ namespace AsbaBank.Presentation.Shell
         
         static Environment()
         {
-            DataStore = new BankContext();
+            DataStore = new BankContext("Bank");
             Logger = new ConsoleWindowLogger();
             ShellCommands = new Dictionary<string, IShellCommand>();
             RegisterCommands();
@@ -35,6 +35,8 @@ namespace AsbaBank.Presentation.Shell
         {
             RegisterCommand(new RegisterClientShell());   
             RegisterCommand(new FetchClientShell());
+            RegisterCommand(new AddAddressToClientShell());
+            RegisterCommand(new FetchClientAddressShell());
         }
 
         private static void RegisterCommand(IShellCommand command)
@@ -49,7 +51,8 @@ namespace AsbaBank.Presentation.Shell
 
             commandPublisher.Subscribe(new RegisterClientHandler(unitOfWork, Logger));
             commandPublisher.Subscribe(new FetchClientHandler(unitOfWork, Logger));
-
+            commandPublisher.Subscribe(new AddAddressToClientHandler(unitOfWork, Logger));
+            commandPublisher.Subscribe(new FetchClientAddressHandler(unitOfWork, Logger));
             return commandPublisher;
         }
     }

@@ -46,7 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\AddAddressToClient.cs" />
     <Compile Include="Commands\FetchClient.cs" />
+    <Compile Include="Commands\FetchClientAddress.cs" />
     <Compile Include="Commands\RegisterClient.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Address.cs" />

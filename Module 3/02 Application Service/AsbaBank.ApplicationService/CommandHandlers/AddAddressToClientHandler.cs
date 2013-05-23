@@ -9,26 +9,28 @@ using AsbaBank.Domain.Models;
 
 namespace AsbaBank.ApplicationService.CommandHandlers
 {
-    public class FetchClientHandler:IHandleCommand<FetchClient>
+    public class AddAddressToClientHandler: IHandleCommand<AddAddressToClient>
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly ILog logger;
 
-        public FetchClientHandler(IUnitOfWork unitOfWork, ILog logger)
+        public AddAddressToClientHandler(IUnitOfWork unitOfWork, ILog logger)
         {
             this.unitOfWork = unitOfWork;
             this.logger = logger;
         }
 
-        public void Execute(FetchClient command)
+        public void Execute(AddAddressToClient command)
         {
-            var clientRepository = unitOfWork.GetRepository<Client>();
+            var AddressReposity = unitOfWork.GetRepository<Address>();
 
             try
             {
-                var client = clientRepository.Get(command.Id);
-              
-                logger.Verbose(" Client Id: {0}\n FirstName: {1} \n Surname: {2} \n Cell Number: {3}", client.Id,client.Name,client.Surname,client.PhoneNumber );
+                var address = new Address(command.ClientId, command.StreetNumber, command.Street,command.PostalCode,command.City);
+                AddressReposity.Add(address);
+                unitOfWork.Commit();
+
+                logger.Verbose("Address added to client id {0}.", address.Id);
             }
             catch
             {

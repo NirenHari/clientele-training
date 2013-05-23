@@ -1,42 +1,38 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 
 namespace AsbaBank.Domain.Models
 {
-    [DataContract]
     public class Address
     {
-        [DataMember]
+        [Key]
+        public int Id { get; protected set; }
         public string StreetNumber { get; protected set; }
-        [DataMember]
         public string Street { get; protected set; }
-        [DataMember]
         public string PostalCode { get; protected set; }
-        [DataMember]
         public string City { get; protected set; }
+
+        public int ClientId { get; protected set; }
+        public Client Client { get; protected set; }
 
         protected Address()
         {
             //here for the deserializer
         }
 
-        public Address(string streetNumber, string street, string postalCode, string city)
+        public Address(int clientId, string streetNumber, string street, string postalCode, string city)
         {
             ValidateInput("street number", streetNumber);
             ValidateInput("street", street);
             ValidateInput("postal code", postalCode);
             ValidateInput("city", city);
-        }
 
-        public static Address NullAddress()
-        {
-            return new Address
-            {
-                City = "Not yet captured",
-                PostalCode = "Not yet captured",
-                Street = "Not yet captured",
-                StreetNumber = "Not yet captured",
-            };
+            ClientId = clientId;
+            StreetNumber = streetNumber;
+            Street = street;
+            PostalCode = postalCode;
+            City = city;
         }
 
         private void ValidateInput(string parameterName, string value)
@@ -46,5 +42,7 @@ namespace AsbaBank.Domain.Models
                 throw new ArgumentException(String.Format("Please provide a valid {0}.", parameterName));
             }
         }
+
+        
     }
 }

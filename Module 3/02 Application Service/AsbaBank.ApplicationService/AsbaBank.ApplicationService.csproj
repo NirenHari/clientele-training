@@ -39,6 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandHandlers\AddAddressToClientHandler.cs" />
+    <Compile Include="CommandHandlers\FetchClientAddressHandler.cs" />
     <Compile Include="CommandHandlers\FetchClientHandler.cs" />
     <Compile Include="CommandHandlers\RegisterClientHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
